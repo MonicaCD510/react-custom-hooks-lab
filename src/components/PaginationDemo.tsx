@@ -3,7 +3,16 @@ import usePagination from "../hooks/usePagination";
 export default function PaginationDemo() {
   const items = Array.from({ length: 100 }, (_, index) => `Item ${index + 1}`);
 
-  const { startIndex, endIndex } = usePagination(items.length, 10);
+  const {
+    currentPage,
+    totalPages,
+    startIndex,
+    endIndex,
+    nextPage,
+    prevPage,
+    canNextPage,
+    canPrevPage,
+  } = usePagination(items.length, 10);
 
   const currentItems = items.slice(startIndex, endIndex + 1);
 
@@ -14,6 +23,18 @@ export default function PaginationDemo() {
       {currentItems.map((item) => (
         <p key={item}>{item}</p>
       ))}
+
+      <button onClick={prevPage} disabled={!canPrevPage}>
+        Previous
+      </button>
+
+      <span>
+        Page {currentPage} of {totalPages}
+      </span>
+
+      <button onClick={nextPage} disabled={!canNextPage}>
+        Next
+      </button>
     </div>
   );
 }
