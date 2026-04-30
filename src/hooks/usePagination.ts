@@ -17,10 +17,17 @@ export default function usePagination(
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
+  const setPage = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   return {
     currentPage,
     totalPages,
     nextPage,
     prevPage,
+    setPage,
   };
 }
