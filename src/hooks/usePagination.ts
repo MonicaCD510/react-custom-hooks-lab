@@ -23,11 +23,25 @@ export default function usePagination(
     }
   };
 
+  const canNextPage = currentPage < totalPages;
+  const canPrevPage = currentPage > 1;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage - 1, totalItems - 1);
+
+  const itemsOnCurrentPage =
+    totalItems === 0 ? 0 : endIndex - startIndex + 1;
+
   return {
     currentPage,
     totalPages,
     nextPage,
     prevPage,
     setPage,
+    canNextPage,
+    canPrevPage,
+    startIndex,
+    endIndex,
+    itemsOnCurrentPage,
   };
 }
