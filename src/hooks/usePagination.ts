@@ -9,8 +9,18 @@ export default function usePagination(
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
+  const nextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
   return {
     currentPage,
     totalPages,
+    nextPage,
+    prevPage,
   };
 }
